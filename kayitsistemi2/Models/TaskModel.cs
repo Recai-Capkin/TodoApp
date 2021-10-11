@@ -16,11 +16,12 @@ namespace kayitsistemi2.Models
 
         //Creator
         public string IdentityCreatorId { get; set; }
-       // public virtual IdentityUser IdentityCreator { get; set;}
 
         //Owner
         public string IdentityUserId { get; set; }
 
         public bool TaskStatus { get; set; }
+        public DateTime CreateTime { get; set; }
+        public DateTime FinishTime { get; set; }
     }
 }
