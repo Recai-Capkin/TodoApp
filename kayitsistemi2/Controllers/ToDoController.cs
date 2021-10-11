@@ -1,4 +1,5 @@
-﻿using kayitsistemi2.Data;
+﻿using kayitsistemi2.Areas.Identity.Data;
+using kayitsistemi2.Data;
 using kayitsistemi2.Models;
 using kayitsistemi2.Repository;
 using Microsoft.AspNetCore.Authorization;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -50,12 +52,18 @@ namespace kayitsistemi2.Controllers
 
         }
         [HttpGet]
-        public IActionResult Create() => View();
+        public IActionResult Create()
+        {
+            //Yeni eklendi view a veri gidecek.
+            return View();
+        }
+
 
         [HttpPost]
         public async Task<ActionResult> Create(TaskModel taskModel)
         {
             taskModel.IdentityCreatorId = User.FindFirstValue(ClaimTypes.Name);
+            taskModel.CreateTime = DateTime.Now;
             context.Add(taskModel);
             await context.SaveChangesAsync();
             return RedirectToAction("Index");
