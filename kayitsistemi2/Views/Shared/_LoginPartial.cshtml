@@ -1,0 +1,47 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using kayitsistemi2.Areas.Identity.Data
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<ul class="navbar-nav ml-auto">
+    @if (SignInManager.IsSignedIn(User) && SignInManager.Context.User.IsInRole("Admin"))
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="ToDo" asp-action="Index">ToDo List</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Role" asp-action="Index">User Role List</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="UserTask" asp-action="Usertask">UserTask</a>
+        </li>
+        <li class="nav-item">
+            <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Merhaba Admin @UserManager.GetUserName(User)!</a>
+        </li>
+        <li class="nav-item">
+            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+            </form>
+        </li>
+
+    }
+    else if (SignInManager.IsSignedIn(User) && SignInManager.Context.User.IsInRole("User"))
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="ToDo" asp-action="Index">ToDo List</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="UserTask" asp-action="Usertask">UserTask</a>
+        </li>
+        <li class="nav-item">
+            <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Merhaba Kullanıcı @UserManager.GetUserName(User)!</a>
+        </li>
+
+        <li class="nav-item float-right">
+            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button id="logout" type="submit" class="nav-link btn btn-link text-dark ">Logout</button>
+            </form>
+        </li>
+    }
+</ul>
