@@ -17,6 +17,12 @@
                 Oluşturan Kişi
             </th>
             <th>
+                Oluşturulma Tarihi
+            </th>
+            <th>
+                Görev Bitirilme Tarihi
+            </th>
+            <th>
                 Status
             </th>
             <th>
@@ -33,49 +39,55 @@
         {
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @item.Content
-                    </td>
-                    <td>
-                        <a>@item.TaskId</a>
-                    </td>
-                    <td>
-                        <a>@item.IdentityCreatorId</a>
-                    </td>
-                    <td>
-                        <div class="form-group form-check">
-                            @if (item.TaskStatus == false)
-                            {
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="@item.TaskStatus" disabled>
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    Yapılmadı
-                                </label>
-                            }
-                            else
-                            {
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="@item.TaskStatus" checked disabled>
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    Yapıldı
-                                </label>
-                            }
-                        </div>
-                    </td>
-                    <td>
-                        @if (item.TaskStatus == false)
-                        {
-                            <a class="btn btn-info" href="/usertask/do/@item.TaskId">Yap</a>
-                        }
-                        else
-                        {
-                            <a class="btn btn-info disabled" href="/usertask/do/@item.TaskId" >Yap</a>
-                        }
+        <tr>
+            <td>
+                @item.Content
+            </td>
+            <td>
+                <a>@item.TaskId</a>
+            </td>
+            <td>
+                <a>@item.IdentityCreatorId</a>
+            </td>
+            <td>
+                <a>@item.CreateTime</a>
+            </td>
+            <td>
+                <a>@item.FinishTime</a>
+            </td>
+            <td>
+                <div class="form-group form-check">
+                    @if (item.TaskStatus == false)
+                    {
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="@item.TaskStatus" disabled>
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Yapılmadı
+                        </label>
+                    }
+                    else
+                    {
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="@item.TaskStatus" checked disabled>
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Yapıldı
+                        </label>
+                    }
+                </div>
+            </td>
+            <td>
+                @if (item.TaskStatus == false)
+                {
+                    <a class="btn btn-info" href="/usertask/do/@item.TaskId">Yap</a>
+                }
+                else
+                {
+                    <a class="btn btn-info disabled" href="/usertask/do/@item.TaskId">Yap</a>
+                }
 
-                    </td>
-                    <td>
-                        <a>@item.IdentityUserId</a>
-                    </td>
-                </tr>
+            </td>
+            <td>
+                <a>@item.IdentityUserId</a>
+            </td>
+        </tr>
             }
         }
 

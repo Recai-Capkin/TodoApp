@@ -19,11 +19,18 @@
                 Oluşturan Kişi
             </th>
             <th>
+                Oluşturma Tarihi
+            </th>
+            <th>
+                Bitiş Tarihi
+            </th>
+            <th>
                 Status
             </th>
             <th>
                 Yapan Kişi
             </th>
+
         </tr>
     </thead>
     <tbody>
@@ -47,6 +54,12 @@
             </td>
             <td>
                 <a>@item.IdentityCreatorId</a>
+            </td>
+            <td>
+                <a>@item.CreateTime</a>
+            </td>
+            <td>
+                <a>@item.FinishTime</a>
             </td>
             <td>
                 @if (item.TaskStatus)

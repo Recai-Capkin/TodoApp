@@ -54,7 +54,7 @@ namespace kayitsistemi2.Controllers
             var task = context.TaskModels.First(x => x.TaskId == id);
             task.TaskStatus = true;
             task.IdentityUserId = userName;
-            
+            task.FinishTime = DateTime.Now;
 
             context.Update(task);
             await context.SaveChangesAsync().ConfigureAwait(false);//buna bak
