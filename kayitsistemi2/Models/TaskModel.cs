@@ -22,6 +22,6 @@ namespace kayitsistemi2.Models
 
         public bool TaskStatus { get; set; }
         public DateTime CreateTime { get; set; }
-        public DateTime FinishTime { get; set; }
+        public DateTime ?FinishTime { get; set; }
     }
 }

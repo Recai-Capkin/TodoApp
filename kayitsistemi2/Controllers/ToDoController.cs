@@ -68,7 +68,7 @@ namespace kayitsistemi2.Controllers
             string userId = form["userId"];
             taskModel.IdentityCreatorId = User.FindFirstValue(ClaimTypes.Name);
             taskModel.CreateTime = DateTime.Now;
-
+            taskModel.FinishTime = null;
             taskModel.IdentityUserId = userId;
             context.Add(taskModel);
             await context.SaveChangesAsync();

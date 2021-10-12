@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using kayitsistemi2.Data;
 
 namespace kayitsistemi2.Migrations
 {
     [DbContext(typeof(KayitdbContext))]
-    partial class KayitdbContextModelSnapshot : ModelSnapshot
+    [Migration("20211012123612_Modelgüncelleme")]
+    partial class Modelgüncelleme
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
