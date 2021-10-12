@@ -122,7 +122,7 @@ namespace kayitsistemi2.Controllers
             {
                 var userName = User.FindFirstValue(ClaimTypes.Name);
                 item.IdentityCreatorId = userName;
-                var userid = item.IdentityUserId;
+                item.CreateTime = DateTime.Now;
                 context.Update(item);
                 await context.SaveChangesAsync();
               
