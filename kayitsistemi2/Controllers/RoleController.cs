@@ -23,7 +23,7 @@ namespace kayitsistemi2.Controllers
             var roles = await _roleManager.Roles.ToListAsync();
             return View(roles);
         }
-        public async Task<IActionResult> AddRole() => View();
+        public IActionResult AddRole() => View();
 
         [HttpPost]
         public async Task<IActionResult> AddRole(IdentityRole identityRole)

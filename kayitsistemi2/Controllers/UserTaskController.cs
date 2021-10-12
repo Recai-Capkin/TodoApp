@@ -27,7 +27,7 @@ namespace kayitsistemi2.Controllers
 
 
 
-        public async Task<ActionResult> Index()
+        public IActionResult Index()
         {
             //IQueryable<TaskModel> items = from i in context.TaskModels orderby i.TaskId select i;
 
@@ -35,7 +35,6 @@ namespace kayitsistemi2.Controllers
 
             //return View(todoList);
             return View();
-
         }
 
         [HttpGet]
