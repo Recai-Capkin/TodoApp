@@ -16,11 +16,13 @@ namespace kayitsistemi2.Controllers
     [Authorize(Roles = "User")]
     public class UserTaskController : Controller
     {
-        private readonly KayitdbContext context;      
+        private readonly KayitdbContext context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public UserTaskController(KayitdbContext context)
+        public UserTaskController(KayitdbContext context, UserManager<ApplicationUser> userManager)
         {
             this.context = context;
+            _userManager = userManager;
         }
 
 
@@ -39,10 +41,18 @@ namespace kayitsistemi2.Controllers
         [HttpGet]
         public async Task<ActionResult> UserTask()
         {
+            var current_User = await _userManager.GetUserAsync(HttpContext.User);
+            var cr = current_User.Id;
             IQueryable<TaskModel> items = from i in context.TaskModels orderby i.TaskId select i;
 
-            List<TaskModel> todoList = await items.ToListAsync();
+            List<TaskModel> todoList = await items.Where(t => t.IdentityUserId == current_User.Id).ToListAsync();
 
+            //string currentUserId = _userManager.Users..GetUserId();
+            //ApplicationUser currentUser = _userManager.Users.FirstOrDefault(x => x.Id == currentUserId);
+            //var current_User = await _userManager.GetUserAsync(HttpContext.User);
+
+
+            // var tasks = context.TaskModels.Select(t => new TaskModel {  } ).Where(t => t.TaskId == ClaimTypes.)
 
             return View(todoList);
         }
@@ -53,7 +63,7 @@ namespace kayitsistemi2.Controllers
             var userName = User.FindFirstValue(ClaimTypes.Name);
             var task = context.TaskModels.First(x => x.TaskId == id);
             task.TaskStatus = true;
-            task.IdentityUserId = userName;
+            //task.IdentityUserId = userName;
             task.FinishTime = DateTime.Now;
 
             context.Update(task);

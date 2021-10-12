@@ -3,6 +3,7 @@ using kayitsistemi2.Data;
 using kayitsistemi2.Models;
 using kayitsistemi2.Repository;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -33,12 +34,14 @@ namespace kayitsistemi2.Controllers
         //{
         //    this.unitOfWork = unitOfWork;
         //}
+        private readonly UserManager<ApplicationUser> _userManager;
 
         private readonly KayitdbContext context;
 
-        public ToDoController(KayitdbContext context)
+        public ToDoController(KayitdbContext context, UserManager<ApplicationUser> userManager)
         {
             this.context = context;
+            _userManager = userManager;
         }
 
         // GET /
@@ -55,15 +58,18 @@ namespace kayitsistemi2.Controllers
         public IActionResult Create()
         {
             //Yeni eklendi view a veri gidecek.
+            ViewBag.Users = _userManager.Users;
             return View();
         }
 
 
-        [HttpPost]
-        public async Task<ActionResult> Create(TaskModel taskModel)
-        {
+        public async Task<ActionResult> Create(TaskModel taskModel, IFormCollection form)
+        { 
+            string userId = form["userId"];
             taskModel.IdentityCreatorId = User.FindFirstValue(ClaimTypes.Name);
             taskModel.CreateTime = DateTime.Now;
+
+            taskModel.IdentityUserId = userId;
             context.Add(taskModel);
             await context.SaveChangesAsync();
             return RedirectToAction("Index");

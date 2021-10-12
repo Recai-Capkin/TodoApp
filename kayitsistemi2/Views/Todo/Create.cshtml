@@ -18,28 +18,28 @@
                 <input asp-for="IdentityCreatorId" class="form-control" type="hidden" value="" />
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                @*<input type="submit" value="Create" class="btn btn-primary" />*@
             </div>
-            <div class="col-md-12">
+            <div class="form-group">
                 <table class="table">
                     <thead class="thead-dark">
                         <tr>
+                            <th scope="col">Id</th>
                             <th scope="col">Kullanıcı Adı</th>
-                            <th scope="col">Seçilen Kullanıcı</th>
-                            <th scope="col">Seç</th>
+                            <th scope="col">Kullanıcı UserName</th>
+                            <th scope="col">Görev Ata</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            @*@foreach (var item in )
-                            {
-                                <td>@item.</td>
-                                <td>..........................</td>
-                                <td>..........................</td>
-                            }*@
-
-
-                        </tr>
+                        @foreach (var item in ViewBag.Users)
+                        {
+                            <tr>
+                                <td >@item.Id</td>
+                                <td>@item.FirstName  @item.LastName</td>
+                                <td>@item.UserName</td>
+                                <td><button type="submit" value="@item.Id" name="userId" class="btn btn-primary">@item.UserName</button></td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>
