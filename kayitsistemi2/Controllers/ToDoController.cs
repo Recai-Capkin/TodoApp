@@ -104,6 +104,7 @@ namespace kayitsistemi2.Controllers
         [HttpGet]
         public async Task<ActionResult> Edit(int id)
         {
+            ViewBag.Users = _userManager.Users;
             TaskModel item = await context.TaskModels.FindAsync(id);
             if (item == null)
             {
@@ -116,12 +117,14 @@ namespace kayitsistemi2.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(TaskModel item)
+        public async Task<ActionResult> Edit(TaskModel item, IFormCollection form)
         {
             if (ModelState.IsValid)
             {
+                string userId = form["userId"];
                 var userName = User.FindFirstValue(ClaimTypes.Name);
                 item.IdentityCreatorId = userName;
+                item.IdentityUserId = userId;
                 item.CreateTime = DateTime.Now;
                 context.Update(item);
                 await context.SaveChangesAsync();

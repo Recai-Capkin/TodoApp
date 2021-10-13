@@ -8,7 +8,7 @@
 
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-12">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="TaskId" />
@@ -18,7 +18,30 @@
                 <span asp-validation-for="Content" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                @*<input type="submit" value="Save" class="btn btn-primary" />*@
+            </div>
+            <div class="form-group">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Kullanıcı Adı</th>
+                            <th scope="col">Kullanıcı UserName</th>
+                            <th scope="col">Görev Ata</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in ViewBag.Users)
+                        {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>@item.FirstName  @item.LastName</td>
+                                <td>@item.UserName</td>
+                                <td><button style="width:220px;" type="submit" value="@item.Id" name="userId" class="btn btn-primary">@item.UserName</button></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
         </form>
     </div>
