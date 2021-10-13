@@ -1,4 +1,4 @@
-﻿
+﻿@model TaskModel
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -7,5 +7,24 @@
     ViewData["Title"] = "Home Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link href="../assets/css/light-bootstrap-dashboard.css?v=2.0.0 " rel="stylesheet" />
+
 <h1>Hoş geldin</h1>
 <h3>@User.Identity.Name</h3>
+
+<h1 class="display-5">Toplam User Sayısı</h1>
+<h1 class="display-5">Toplam Admin Sayısı</h1>
+<h1 class="display-5">Toplam Görev Sayısı</h1>
+<h1 class="display-5">Toplam Yapılan Görev Sayısı</h1>
+<div class="card-body ">
+    <div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>
+    <div class="legend">
+        <i class="fa fa-circle text-info"></i> Open
+        <i class="fa fa-circle text-danger"></i> Bounce
+        <i class="fa fa-circle text-warning"></i> Unsubscribe
+    </div>
+    <hr>
+    <div class="stats">
+        <i class="fa fa-clock-o"></i> Campaign sent 2 days ago
+    </div>
+</div>
