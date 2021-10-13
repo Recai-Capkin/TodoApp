@@ -39,58 +39,61 @@
         {
             @foreach (var item in Model)
             {
-        <tr>
-            <td>
-                @item.Content
-            </td>
-            <td>
-                <a>@item.TaskId</a>
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.TaskId">Edit</a>
-                <a asp-action="Delete" asp-route-id="@item.TaskId">Delete</a>
+                <tr>
+                    <td>
+                        @item.Content
+                    </td>
+                    <td>
+                        <a>@item.TaskId</a>
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.TaskId">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@item.TaskId">Delete</a>
 
 
-            </td>
-            <td>
-                <a>@item.IdentityCreatorId</a>
-            </td>
-            <td>
-                <a>@item.CreateTime</a>
-            </td>
-            <td>
-                <a>@item.FinishTime</a>
-            </td>
-            <td>
-                @if (item.TaskStatus)
-                {
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked disabled>
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Status
-                        </label>
-                    </div>
-                }
-                else
-                {
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" disabled>
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Status
-                        </label>
-                    </div>
-                }
-            </td>
-            <td>
-                <a>@item.IdentityUserId</a>
-            </td>
-        </tr>
+                    </td>
+                    <td>
+                        <a>@item.IdentityCreatorId</a>
+                    </td>
+                    <td>
+                        <a>@item.CreateTime</a>
+                    </td>
+                    <td>
+                        <a>@item.FinishTime</a>
+                    </td>
+                    <td>
+                        @if (item.TaskStatus)
+                        {
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked disabled>
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Status
+                                </label>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" disabled>
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Status
+                                </label>
+                            </div>
+                        }
+                    </td>
+                    <td>
+                        <a>@item.IdentityUserId </a>
+                    </td>
+                </tr>
             }
         }
 
     </tbody>
 </table>
-
+@foreach (var item in ViewBag.Kullanici)
+{
+    <p>@item</p>
+}
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

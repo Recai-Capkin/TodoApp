@@ -44,7 +44,7 @@ namespace kayitsistemi2.Controllers
             var cr = current_User.Id;
             IQueryable<TaskModel> items = from i in context.TaskModels orderby i.TaskId select i;
 
-            List<TaskModel> todoList = await items.Where(t => t.IdentityUserId == current_User.Id).ToListAsync();
+            List<TaskModel> todoList = await items.Where(t => t.IdentityUserId == current_User.UserName).ToListAsync();
 
             //string currentUserId = _userManager.Users..GetUserId();
             //ApplicationUser currentUser = _userManager.Users.FirstOrDefault(x => x.Id == currentUserId);
@@ -62,7 +62,7 @@ namespace kayitsistemi2.Controllers
             var userName = User.FindFirstValue(ClaimTypes.Name);
             var task = context.TaskModels.First(x => x.TaskId == id);
             task.TaskStatus = true;
-            //task.IdentityUserId = userName;
+            task.IdentityUserId = userName;
             task.FinishTime = DateTime.Now;
 
             context.Update(task);

@@ -47,11 +47,34 @@ namespace kayitsistemi2.Controllers
         // GET /
         public async Task<ActionResult> Index()
         {
+
+            //var deneme = from user in context.ApplicationUsers
+            //             join c in context.TaskModels
+            //             on user.Id equals c.IdentityUserId select (user.FirstName+user.LastName).Distinct().ToList();
+
+            
+
+            var deneme2 = (from user in context.ApplicationUsers
+                          join us in context.TaskModels
+                          on user.Id equals us.IdentityUserId
+                          select user).Distinct();
+            var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userName = User.FindFirstValue(ClaimTypes.Name);            
+            ViewBag.Kullanici = deneme2;
+            //var ad = from task in context.TaskModels
+            //         where task.IdentityUserId == (_userManager.Users.)
+            //var userAndRoles = User.Select(user => new
+            //{
+            //    UserName = user.UserName,
+            //    Roles = roles.Where(role => user.Roles.Any(userRole => userRole.UserId == user.UserId && userRole.RoleId == role.RoleId))
+            //});
+
+            #region eski yöntem çalışır
             IQueryable<TaskModel> items = from i in context.TaskModels orderby i.TaskId select i;
-
             List<TaskModel> todoList = await items.ToListAsync();
-
             return View(todoList);
+            #endregion
+            //return View(deneme);
 
         }
         [HttpGet]
