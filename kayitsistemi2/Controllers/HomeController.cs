@@ -35,16 +35,24 @@ namespace kayitsistemi2.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            // var users = userManager.GetUserId;
-            var toplam_kullanici = _context.Users.Count();
-            //var toplam_admin_sayisi = _context.UserRoles.Where(a => a.UserId == _context.Users.Select(c => c.Id));
-            var toplam_gorev_sayisi = _context.TaskModels.Count();
-            var toplam_yapilan_gorev_sayisi = _context.TaskModels.Where(g => g.TaskStatus == true).Count();
-            var toplam_yapilmayan_gorev_sayisi = _context.TaskModels.Where(g => g.TaskStatus == false).Count();
-            ViewBag.ToplamKullanici = toplam_kullanici;
-            ViewBag.ToplamGorevSayisi = toplam_gorev_sayisi;
-            ViewBag.Yapilan_Gorev_Sayisi = toplam_yapilan_gorev_sayisi;
-            ViewBag.Yapilmayan_Gorev_Sayisi = toplam_yapilmayan_gorev_sayisi;
+            if (User.IsInRole("Admin"))
+            {
+                // var users = userManager.GetUserId;
+                var toplam_kullanici = _context.Users.Count();
+                //var toplam_admin_sayisi = _context.UserRoles.Where(a => a.UserId == _context.Users.Select(c => c.Id));
+                var toplam_gorev_sayisi = _context.TaskModels.Count();
+                var toplam_yapilan_gorev_sayisi = _context.TaskModels.Where(g => g.TaskStatus == true).Count();
+                var toplam_yapilmayan_gorev_sayisi = _context.TaskModels.Where(g => g.TaskStatus == false).Count();
+                ViewBag.ToplamKullanici = toplam_kullanici;
+                ViewBag.ToplamGorevSayisi = toplam_gorev_sayisi;
+                ViewBag.Yapilan_Gorev_Sayisi = toplam_yapilan_gorev_sayisi;
+                ViewBag.Yapilmayan_Gorev_Sayisi = toplam_yapilmayan_gorev_sayisi;
+            }
+            else
+            {
+                
+            }
+            
             return View();
         }
 
