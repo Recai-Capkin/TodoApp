@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace kayitsistemi2.Controllers
@@ -33,7 +34,7 @@ namespace kayitsistemi2.Controllers
         //    this.userManager = userManager;
         //}
         [HttpGet]
-        public IActionResult Index()
+        public async Task<ActionResult> Index()
         {
             if (User.IsInRole("Admin"))
             {
@@ -50,21 +51,22 @@ namespace kayitsistemi2.Controllers
             }
             else
             {
-                
+                //var current_User = _userManager.GetUserAsync(HttpContext.User);
+                var userName = User.FindFirstValue(ClaimTypes.Name);
+                var toplamgorev = _context.TaskModels.Where(x => x.IdentityUserId == userName).Count();
+                var toplamyapilangorev = _context.TaskModels.Where(x => x.IdentityUserId == userName && x.TaskStatus == true).Count();
+                var toplamyapilmayangorev = _context.TaskModels.Where(x => x.IdentityUserId == userName && x.TaskStatus == false).Count();
+                ViewBag.Toplamgorev = toplamgorev;
+                ViewBag.ToplamYapilanGorev = toplamyapilangorev;
+                ViewBag.ToplamYapilmayanGorev = toplamyapilmayangorev;
             }
             
             return View();
         }
 
-        [HttpPost]
-        public IActionResult Index(TaskModel model)
-        {
-            //persons.GroupBy(x => x.PersonId).Where(x => x.Count() > 1).Any(x => x)
-           
-            return View();
-        }
         public IActionResult Privacy()
         {
+            //var cr = await _userManager.GetUserName(Claim);
             return View();
         }
 
