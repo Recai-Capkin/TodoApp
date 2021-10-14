@@ -34,7 +34,7 @@ namespace kayitsistemi2.Controllers
         //    this.userManager = userManager;
         //}
         [HttpGet]
-        public async Task<ActionResult> Index()
+        public IActionResult Index()
         {
             if (User.IsInRole("Admin"))
             {
@@ -66,7 +66,6 @@ namespace kayitsistemi2.Controllers
 
         public IActionResult Privacy()
         {
-            //var cr = await _userManager.GetUserName(Claim);
             return View();
         }
 

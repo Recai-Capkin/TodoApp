@@ -45,7 +45,7 @@ namespace kayitsistemi2.Controllers
         }
 
         // GET /
-        public async Task<ActionResult> Index(string sortOrder  )
+        public IActionResult Index(string sortOrder  )
         {
             var veriler = from s in context.TaskModels
                           select s;
