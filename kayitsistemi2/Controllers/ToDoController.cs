@@ -45,38 +45,52 @@ namespace kayitsistemi2.Controllers
         }
 
         // GET /
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string sortOrder  )
         {
-
-            //var deneme = from user in context.ApplicationUsers
-            //             join c in context.TaskModels
-            //             on user.Id equals c.IdentityUserId select (user.FirstName+user.LastName).Distinct().ToList();
-
-            
-
-            var deneme2 = (from user in context.ApplicationUsers
-                          join us in context.TaskModels
-                          on user.Id equals us.IdentityUserId
-                          select user).Distinct();
-            var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var userName = User.FindFirstValue(ClaimTypes.Name);            
-            ViewBag.Kullanici = deneme2;
-            //var ad = from task in context.TaskModels
-            //         where task.IdentityUserId == (_userManager.Users.)
-            //var userAndRoles = User.Select(user => new
-            //{
-            //    UserName = user.UserName,
-            //    Roles = roles.Where(role => user.Roles.Any(userRole => userRole.UserId == user.UserId && userRole.RoleId == role.RoleId))
-            //});
-
+            var veriler = from s in context.TaskModels
+                          select s;
+            ViewData["DateSortParm"] = sortOrder == "CreateTime" ? "CreateTime_desc" : "CreateTime";
+            ViewData["DateSortFT"] = sortOrder == "FinishTime" ? "FinishTime_desc" : "FinishTime";
+            switch (sortOrder)
+            {
+                case "CreateTime":
+                    veriler = veriler.OrderBy(s => s.CreateTime);
+                    break;
+                case "CreateTime_desc":
+                    veriler = veriler.OrderByDescending(s => s.CreateTime);
+                    break;
+                case "FinishTime":
+                    veriler = veriler.OrderBy(s => s.FinishTime);
+                    break;
+                case "FinishTime_desc":
+                    veriler = veriler.OrderByDescending(s => s.FinishTime);
+                    break;
+                default:
+                    break;
+            }
             #region eski yöntem çalışır
-            IQueryable<TaskModel> items = from i in context.TaskModels orderby i.TaskId select i;
-            List<TaskModel> todoList = await items.ToListAsync();
-            return View(todoList);
+            //IQueryable<TaskModel> items = from i in context.TaskModels orderby i.TaskId select i;
+            //List<TaskModel> todoList = await items.ToListAsync();
+            //return View(todoList);
             #endregion
-            //return View(deneme);
-
+            return View(veriler);
         }
+        [HttpGet]
+        public async Task<ActionResult> OrderByBK()
+        {
+            var veribk = context.TaskModels.OrderByDescending(t => t.CreateTime);
+            await context.SaveChangesAsync();
+            return View("Index", veribk);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> OrderByKB()
+        {
+            var veribk = context.TaskModels.OrderBy(t => t.CreateTime);
+            await context.SaveChangesAsync();
+            return View("Index", veribk);
+        }
+
         [HttpGet]
         public IActionResult Create()
         {

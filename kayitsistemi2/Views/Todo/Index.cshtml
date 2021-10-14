@@ -1,8 +1,27 @@
 ﻿@model IEnumerable<kayitsistemi2.Models.TaskModel>
 
-<p>
+@*<p>
     <a asp-action="Create">Yeni Görev Ekleme</a>
-</p>
+    <a>Büyükten Küçüğe</a>
+    <a>Küçükten Büyüğe</a>
+</p>*@
+<br />
+<div class="container text-center" style="background-color:dimgrey; height:100px; align-items:center;">
+    <div class="row" style="background-color:dimgrey; height:100px; align-items:center;">
+        <div class="col">
+            <h5 style="color:white;">Görev Ekle</h5>
+            <a class="btn btn-primary" asp-action="Create">Yeni Görev Ekleme</a>
+        </div>
+        <div class="col">
+            <h5 style="color:white;">Yapılma Tarihi Sıralama</h5>
+            <a class="btn btn-primary" asp-route-sortOrder="@ViewData["DateSortFT"]">Sırala</a>
+        </div>
+        <div class="col">
+            <h5 style="color:white;">Oluşturma Tarihi Sıralama</h5>
+            <a class="btn btn-primary" asp-route-sortOrder="@ViewData["DateSortParm"]">Sırala</a>
+        </div>
+    </div>
+</div>
 <table class="table">
     <thead>
         <tr>
@@ -19,7 +38,7 @@
                 Oluşturan Kişi
             </th>
             <th>
-                Oluşturma Tarihi
+                <a>Oluşturma Tarihi</a>
             </th>
             <th>
                 Bitiş Tarihi
@@ -90,10 +109,7 @@
 
     </tbody>
 </table>
-@foreach (var item in ViewBag.Kullanici)
-{
-    <p>@item</p>
-}
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

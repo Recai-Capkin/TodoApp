@@ -41,6 +41,10 @@ namespace kayitsistemi2.Controllers
             var toplam_gorev_sayisi = _context.TaskModels.Count();
             var toplam_yapilan_gorev_sayisi = _context.TaskModels.Where(g => g.TaskStatus == true).Count();
             var toplam_yapilmayan_gorev_sayisi = _context.TaskModels.Where(g => g.TaskStatus == false).Count();
+            ViewBag.ToplamKullanici = toplam_kullanici;
+            ViewBag.ToplamGorevSayisi = toplam_gorev_sayisi;
+            ViewBag.Yapilan_Gorev_Sayisi = toplam_yapilan_gorev_sayisi;
+            ViewBag.Yapilmayan_Gorev_Sayisi = toplam_yapilmayan_gorev_sayisi;
             return View();
         }
 
