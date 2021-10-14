@@ -49,6 +49,7 @@ namespace kayitsistemi2.Controllers
         {
             var veriler = from s in context.TaskModels
                           select s;
+            ViewData["UnFinishedTask"] = sortOrder == "TaskStatus" ? "TaskStatus_True" : "TaskStatus_False";
             ViewData["DateSortParm"] = sortOrder == "CreateTime" ? "CreateTime_desc" : "CreateTime";
             ViewData["DateSortFT"] = sortOrder == "FinishTime" ? "FinishTime_desc" : "FinishTime";
             switch (sortOrder)
@@ -65,6 +66,14 @@ namespace kayitsistemi2.Controllers
                 case "FinishTime_desc":
                     veriler = veriler.OrderByDescending(s => s.FinishTime);
                     break;
+                case "TaskStatus_False":
+                    veriler = veriler.Where(x => x.TaskStatus == false);
+                    ViewData["UnFinishedTask"] = "TaskStatus_True";
+                    break;
+                case "TaskStatus_True":
+                    veriler = veriler.Where(x => x.TaskStatus == true);
+                    ViewData["UnFinishedTask"] = "TaskStatus_False";
+                    break;
                 default:
                     break;
             }
@@ -74,21 +83,6 @@ namespace kayitsistemi2.Controllers
             //return View(todoList);
             #endregion
             return View(veriler);
-        }
-        [HttpGet]
-        public async Task<ActionResult> OrderByBK()
-        {
-            var veribk = context.TaskModels.OrderByDescending(t => t.CreateTime);
-            await context.SaveChangesAsync();
-            return View("Index", veribk);
-        }
-
-        [HttpGet]
-        public async Task<ActionResult> OrderByKB()
-        {
-            var veribk = context.TaskModels.OrderBy(t => t.CreateTime);
-            await context.SaveChangesAsync();
-            return View("Index", veribk);
         }
 
         [HttpGet]

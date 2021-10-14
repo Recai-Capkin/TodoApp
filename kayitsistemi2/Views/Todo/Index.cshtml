@@ -1,10 +1,9 @@
 ﻿@model IEnumerable<kayitsistemi2.Models.TaskModel>
-
 @*<p>
-    <a asp-action="Create">Yeni Görev Ekleme</a>
-    <a>Büyükten Küçüğe</a>
-    <a>Küçükten Büyüğe</a>
-</p>*@
+        <a asp-action="Create">Yeni Görev Ekleme</a>
+        <a>Büyükten Küçüğe</a>
+        <a>Küçükten Büyüğe</a>
+    </p>*@
 <br />
 <div class="container text-center" style="background-color:darkgrey; height:100px; align-items:center;">
     <div class="row" style=" height:100px; align-items:center;">
@@ -19,6 +18,9 @@
         <div class="col">
             <h5 style="color:white;">Oluşturma Tarihi Sıralama</h5>
             <a class="btn btn-primary" asp-route-sortOrder="@ViewData["DateSortParm"]">Sırala</a>
+        </div><div class="col">
+            <h5 style="color:white;">Yapan/Yapmayanları Sırala</h5>
+            <a class="btn btn-primary" asp-route-sortOrder="@ViewData["UnFinishedTask"]">Sırala</a>
         </div>
     </div>
 </div>
