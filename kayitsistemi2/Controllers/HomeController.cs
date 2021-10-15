@@ -33,7 +33,7 @@ namespace kayitsistemi2.Controllers
         //{
         //    this.userManager = userManager;
         //}
-        [HttpGet]
+        [HttpGet("index.html")]
         public IActionResult Index()
         {
             if (User.IsInRole("Admin"))
