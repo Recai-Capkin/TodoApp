@@ -20,7 +20,7 @@ namespace kayitsistemi2.Models
         //Owner
         public string IdentityUserId { get; set; }
 
-        public DateTime CreatedTime { get; set; }
+        public DateTime CreateTime { get; set; }
         public DateTime FinishTime { get; set; }
 
         public bool TaskStatus { get; set; }
