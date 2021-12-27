@@ -26,5 +26,6 @@ namespace kayitsistemi2.Data
             
         }
         public DbSet<TaskModel> TaskModels { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
     }
 }

@@ -102,6 +102,7 @@ namespace kayitsistemi2.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
+                    //Cshtml sayfasından seçilen rol bilgisi name aracılığı ile gönderilir.
                     var role = Request.Form["Role"];
                     await _userManager.AddToRoleAsync(user, role);
                     #region Rol Oluşturma Yeri

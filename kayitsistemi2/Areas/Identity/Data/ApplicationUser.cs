@@ -14,7 +14,7 @@ namespace kayitsistemi2.Areas.Identity.Data
     {
 
         [PersonalData]
-        [Column(TypeName ="nvarchar(100)")]
+        [Column(TypeName = "nvarchar(100)")]
         public string FirstName { get; set; }
 
         [PersonalData]

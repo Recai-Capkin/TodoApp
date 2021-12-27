@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using kayitsistemi2.Areas.Identity.Data;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -24,5 +25,7 @@ namespace kayitsistemi2.Models
         public DateTime FinishTime { get; set; }
 
         public bool TaskStatus { get; set; }
+        public DateTime CreateTime { get; set; }
+        public DateTime ?FinishTime { get; set; }
     }
 }

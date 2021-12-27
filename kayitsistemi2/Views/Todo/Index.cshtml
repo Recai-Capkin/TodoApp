@@ -1,8 +1,29 @@
 ﻿@model IEnumerable<kayitsistemi2.Models.TaskModel>
-
-<p>
-    <a asp-action="Create">Add new ToDo Item</a>
-</p>
+@*<p>
+        <a asp-action="Create">Yeni Görev Ekleme</a>
+        <a>Büyükten Küçüğe</a>
+        <a>Küçükten Büyüğe</a>
+    </p>*@
+<br />
+<div class="container text-center" style="background-color:darkgrey; height:100px; align-items:center;">
+    <div class="row" style=" height:100px; align-items:center;">
+        <div class="col">
+            <h5 style="color:white;">Görev Ekle</h5>
+            <a class="btn btn-primary" asp-action="Create">Yeni Görev Ekleme</a>
+        </div>
+        <div class="col">
+            <h5 style="color:white;">Bitirilme Tarihi Sıralama</h5>
+            <a class="btn btn-primary" asp-route-sortOrder="@ViewData["DateSortFT"]">Sırala</a>
+        </div>
+        <div class="col">
+            <h5 style="color:white;">Oluşturma Tarihi Sıralama</h5>
+            <a class="btn btn-primary" asp-route-sortOrder="@ViewData["DateSortParm"]">Sırala</a>
+        </div><div class="col">
+            <h5 style="color:white;">Yapan/Yapmayanları Sırala</h5>
+            <a class="btn btn-primary" asp-route-sortOrder="@ViewData["UnFinishedTask"]">Sırala</a>
+        </div>
+    </div>
+</div>
 <table class="table">
     <thead>
         <tr>
@@ -19,11 +40,18 @@
                 Oluşturan Kişi
             </th>
             <th>
+                <a>Oluşturma Tarihi</a>
+            </th>
+            <th>
+                Bitiş Tarihi
+            </th>
+            <th>
                 Status
             </th>
             <th>
                 Yapan Kişi
             </th>
+
         </tr>
     </thead>
     <tbody>
@@ -32,46 +60,52 @@
         {
             @foreach (var item in Model)
             {
-        <tr>
-            <td>
-                @item.Content
-            </td>
-            <td>
-                <a>@item.TaskId</a>
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.TaskId">Edit</a>
-                <a asp-action="Delete" asp-route-id="@item.TaskId">Delete</a>
+                <tr>
+                    <td>
+                        @item.Content
+                    </td>
+                    <td>
+                        <a>@item.TaskId</a>
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.TaskId">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@item.TaskId">Delete</a>
 
 
-            </td>
-            <td>
-                <a>@item.IdentityCreatorId</a>
-            </td>
-            <td>
-                @if (item.TaskStatus)
-                {
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked disabled>
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Status
-                        </label>
-                    </div>
-                }
-                else
-                {
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" disabled>
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Status
-                        </label>
-                    </div>
-                }
-            </td>
-            <td>
-                <a>@item.IdentityUserId</a>
-            </td>
-        </tr>
+                    </td>
+                    <td>
+                        <a>@item.IdentityCreatorId</a>
+                    </td>
+                    <td>
+                        <a>@item.CreateTime</a>
+                    </td>
+                    <td>
+                        <a>@item.FinishTime</a>
+                    </td>
+                    <td>
+                        @if (item.TaskStatus)
+                        {
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked disabled>
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Status
+                                </label>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" disabled>
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Status
+                                </label>
+                            </div>
+                        }
+                    </td>
+                    <td>
+                        <a>@item.IdentityUserId </a>
+                    </td>
+                </tr>
             }
         }
 

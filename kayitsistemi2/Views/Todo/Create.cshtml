@@ -4,11 +4,11 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Add a new item</h1>
+<h1>Yeni bir görev ekle</h1>
 
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-12">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -18,14 +18,37 @@
                 <input asp-for="IdentityCreatorId" class="form-control" type="hidden" value="" />
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                @*<input type="submit" value="Create" class="btn btn-primary" />*@
+            </div>
+            <div class="form-group">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Kullanıcı Adı</th>
+                            <th scope="col">Kullanıcı UserName</th>
+                            <th scope="col">Görev Ata</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in ViewBag.Users)
+                        {
+                            <tr>
+                                <td >@item.Id</td>
+                                <td>@item.FirstName  @item.LastName</td>
+                                <td>@item.UserName</td>
+                                <td><button style="width:220px;" type="submit" value="@item.UserName" name="userId" class="btn btn-primary" >@item.UserName</button></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Görevler listesine geri dön.</a>
 </div>
 
 @section Scripts {
